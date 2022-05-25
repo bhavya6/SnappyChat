@@ -23,6 +23,12 @@ function Register() {
     draggable: true,
     theme: "dark",
   };
+  
+  useEffect(()=> {
+    if(localStorage.getItem("chat-app-user")){
+      navigate("/");
+    }
+  }, {});
   //changes the state whenever the value changes
   const handleValidation = () => {
     const { password, confirmPassword, username, email } = values;
