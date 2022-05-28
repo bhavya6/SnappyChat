@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 module.exports.register = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
-    console.log(User);
+    // console.log(User);
     const usernameCheck = await User.findOne({ username });
     if (usernameCheck) {
       return res.json({ msg: "Username already used", status: false });
