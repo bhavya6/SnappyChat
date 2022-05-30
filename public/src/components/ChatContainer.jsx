@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Logout from "./Logout";
-import ChatInput from "./ChatInput";
 import axios from "axios";
-import { getAllMessagesRoute, sendMessageRoute } from "../utils/APIroutes";
-import {v4 as uuidv4} from "uuid";
+import ChatInput from "./ChatInput";
 
+import { getAllMessagesRoute, sendMessageRoute } from "../utils/APIroutes";
+import { v4 as uuidv4 } from "uuid";
 
 export default function ChatContainer({ currentChat, currentUser, socket }) {
   const [messages, setMessages] = useState([]);
@@ -24,6 +24,7 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentChat]);
+
   const handleSendMsg = (msg) => {
     (async () => {
       await axios.post(sendMessageRoute, {
@@ -43,12 +44,14 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
       setMessages(msgs);
     })();
   };
+
   useEffect(() => {
     if (socket.current) {
       socket.current.on("msg-recieve", (msg) => {
         setArrivalMessage({ fromSelf: false, message: msg });
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -58,6 +61,7 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behaviour: "smooth" });
   }, [messages]);
+
   return (
     <>
       {currentChat && (
@@ -74,7 +78,6 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
                 <h3>{currentChat.username}</h3>
               </div>
             </div>
-
             <Logout></Logout>
           </div>
           <div className="chat-messages">

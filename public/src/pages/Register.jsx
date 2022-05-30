@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import styled from "styled-components";
 import Logo from "../assets/logo.svg";
+import axios from "axios";
+
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 import { registerRoute } from "../utils/APIroutes";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function Register() {
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ function Register() {
     draggable: true,
     theme: "dark",
   };
-  //changes the state whenever the value changes
+
   const handleValidation = () => {
     const { password, confirmPassword, username, email } = values;
     
@@ -45,6 +47,7 @@ function Register() {
     }
     return true;
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     //if validated then call the api
@@ -65,9 +68,10 @@ function Register() {
         localStorage.setItem("chat-app-user", JSON.stringify(data.user));
         navigate("/");
       }
-      
     }
   };
+
+   //changes the state whenever the value changes
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };

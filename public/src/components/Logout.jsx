@@ -1,23 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import {BiPowerOff} from "react-icons/bi";
-
+import { BiPowerOff } from "react-icons/bi";
 
 export default function Logout() {
-    const navigate = useNavigate();
-    const handleClick = async ()=> {
-        localStorage.clear();
-        navigate("/login");
-    }
-    return <Button onClick={handleClick}>
-        <BiPowerOff></BiPowerOff>
+  const navigate = useNavigate();
+  const handleClick = async () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+  return (
+    <Button onClick={handleClick}>
+      <BiPowerOff></BiPowerOff>
     </Button>
+  );
 }
 
 const Button = styled.button`
-display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   padding: 0.5rem;
@@ -28,4 +28,5 @@ display: flex;
   svg {
     font-size: 1.3rem;
     color: #ebe7ff;
-  }`;
+  }
+`;

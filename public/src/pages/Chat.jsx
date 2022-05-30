@@ -1,20 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { allUsersRoute, host } from "../utils/APIroutes.js";
 import Contacts from "../components/Contacts.jsx";
 import Welcome from "../components/Welcome.jsx";
 import ChatContainer from "../components/ChatContainer.jsx";
-import {io} from "socket.io-client";
+
+import { useNavigate } from "react-router-dom";
+import { allUsersRoute, host } from "../utils/APIroutes.js";
+import { io } from "socket.io-client";
 
 function Chat() {
   const socket = useRef();
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -29,7 +31,7 @@ function Chat() {
 
   useEffect(() => {
     (async () => {
-      if(currentUser){
+      if (currentUser) {
         socket.current = io(host);
         socket.current.emit("add-user", currentUser._id);
       }
@@ -48,9 +50,11 @@ function Chat() {
       }
     })();
   }, [currentUser]);
+
   const handleChatChange = (chat) => {
     setCurrentChat(chat);
   };
+
   return (
     <>
       <Container>
@@ -60,10 +64,15 @@ function Chat() {
             currentUser={currentUser}
             changeChat={handleChatChange}
           ></Contacts>
+
           {isLoaded && currentChat === undefined ? (
             <Welcome></Welcome>
           ) : (
-            <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket}></ChatContainer>
+            <ChatContainer
+              currentChat={currentChat}
+              currentUser={currentUser}
+              socket={socket}
+            ></ChatContainer>
           )}
         </div>
       </Container>
@@ -91,4 +100,5 @@ const Container = styled.div`
     }
   }
 `;
+
 export default Chat;

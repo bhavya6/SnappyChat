@@ -1,17 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import loader from "../assets/loader.gif";
+
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 import { setAvatarRoute } from "../utils/APIroutes";
-import loader from "../assets/loader.gif";
 import { Buffer } from "buffer";
+
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SetAvatar() {
   const api = "https://api.multiavatar.com/45678945";
   const navigate = useNavigate();
-  //initially state of below is blank array
+
   const [avatars, setAvatars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedAvatar, setSelectedAvatar] = useState(undefined);
@@ -36,7 +39,6 @@ export default function SetAvatar() {
       toast.error("Please select and avatar", toastOptions);
     } else {
       const user = await JSON.parse(localStorage.getItem("chat-app-user"));
-
       const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
         image: avatars[selectedAvatar],
       });
@@ -52,10 +54,10 @@ export default function SetAvatar() {
     }
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     (async () => {
       const data = [];
+
       for (let i = 0; i < 4; i++) {
         const image = await axios.get(
           `${api}/${Math.round(Math.random() * 1000)}`
@@ -63,6 +65,7 @@ export default function SetAvatar() {
         const buffer = new Buffer(image.data);
         data.push(buffer.toString("base64"));
       }
+
       setAvatars(data);
       setIsLoading(false);
     })();
@@ -79,6 +82,7 @@ export default function SetAvatar() {
           <div className="title-container">
             <h1>Pick an avatar as your profile picture</h1>
           </div>
+
           <div className="avatars">
             {avatars.map((avatar, index) => {
               return (
@@ -97,6 +101,7 @@ export default function SetAvatar() {
               );
             })}
           </div>
+
           <button className="submit-btn" onClick={setProfilePicture}>
             Set as Profile Picture
           </button>

@@ -2,11 +2,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../assets/logo.svg";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 import { LoginRoute } from "../utils/APIroutes";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -24,8 +25,8 @@ function Login() {
   };
 
   //if user is present in localstorage then there is no need to login again
-  useEffect(()=> {
-    if(localStorage.getItem("chat-app-user")){
+  useEffect(() => {
+    if (localStorage.getItem("chat-app-user")) {
       navigate("/");
     }
   }, []);
@@ -48,18 +49,18 @@ function Login() {
     }
     return true;
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     //if validated then call the api
     //it is async func bcs it calls api
     if (handleValidation()) {
       const { username, password } = values;
-
       const { data } = await axios.post(LoginRoute, {
         username,
         password,
       });
-      console.log(data);
+
       if (data.status === false) {
         toast.error(data.msg, toastOptions);
       } else {
