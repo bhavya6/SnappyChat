@@ -65,7 +65,7 @@ function Register() {
         toast.error(data.msg, toastOptions);
       }
       else{
-        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
+        localStorage.setItem(process.env.REACT_APP_LOCALHOST_KEY, JSON.stringify(data.user));
         navigate("/");
       }
     }

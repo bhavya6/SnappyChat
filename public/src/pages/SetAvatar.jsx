@@ -30,7 +30,7 @@ export default function SetAvatar() {
   //if user is not logged in then he cant set profile picture, so he is directed to login page to login first
   useEffect(() => {
     (async () => {
-      if (!localStorage.getItem("chat-app-user")) navigate("/login");
+      if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) navigate("/login");
     })();
   }, []);
 
@@ -38,7 +38,7 @@ export default function SetAvatar() {
     if (selectedAvatar === undefined) {
       toast.error("Please select and avatar", toastOptions);
     } else {
-      const user = await JSON.parse(localStorage.getItem("chat-app-user"));
+      const user = await JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY));
       const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
         image: avatars[selectedAvatar],
       });
@@ -46,7 +46,7 @@ export default function SetAvatar() {
       if (data.isSet) {
         user.isAvatarImageSet = true;
         user.avatarImage = data.image;
-        localStorage.setItem("chat-app-user", JSON.stringify(user));
+        localStorage.setItem(process.env.REACT_APP_LOCALHOST_KEY, JSON.stringify(user));
         navigate("/");
       } else {
         toast.error("Error setting avatar. Please try again.", toastOptions);
