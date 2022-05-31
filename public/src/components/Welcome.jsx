@@ -31,10 +31,19 @@ const Container = styled.div`
   align-items: center;
   color: white;
   flex-direction: column;
+  text-align: center;
   img {
     height: 20rem;
   }
   span {
     color: #4e0eff;
+  }
+  @media screen and (max-width : 720px){
+    h3{
+      padding-top: 15px;
+    }
+    img{
+      height: 15rem;
+    }
   }
 `;

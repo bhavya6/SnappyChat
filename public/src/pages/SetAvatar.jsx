@@ -129,6 +129,7 @@ const Container = styled.div`
   .title-container {
     h1 {
       color: white;
+      text-align: center;
     }
   }
   .avatars {
@@ -164,6 +165,18 @@ const Container = styled.div`
     text-transform: uppercase;
     &:hover {
       background-color: #4e0eff;
+    }
+  }
+
+  @media screen and (max-width : 540px){
+    img {
+      width: 4rem;
+    }
+    .loader{
+      width: 50vw;
+    }
+    .avatars{
+      gap: 1rem;
     }
   }
 `;

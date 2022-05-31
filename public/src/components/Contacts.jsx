@@ -86,6 +86,11 @@ const Container = styled.div`
       color: white;
       text-transform: uppercase;
     }
+    @media screen and (max-width: 720px) {
+      h3{
+        display: none;
+      }
+    }
   }
   .contacts {
     display: flex;
@@ -120,7 +125,6 @@ const Container = styled.div`
       .username {
         h3 {
           color: white;
-   
         }
       }
     }
@@ -129,16 +133,15 @@ const Container = styled.div`
     }
     @media screen and (max-width: 720px) {
       gap: 0.5rem;
+      justify-content: flex-start;
+      padding-left: 5px;
       .username {
         h3 {
           font-size: 1rem;
         }
       }
       .avatar {
-        img {
-          height: 1rem;
-          width: 2rem;
-        }
+        display: none;
       }
     }
   }
@@ -166,6 +169,19 @@ const Container = styled.div`
         h2 {
           font-size: 1rem;
         }
+      }
+    }
+    @media screen and (max-width: 720px) {
+      gap: 0.25rem;
+      justify-content: flex-start;
+      padding-left: 5px;
+      .username {
+        h2 {
+          font-size: 1rem;
+        }
+      }
+      .avatar {
+        display: none;
       }
     }
   }

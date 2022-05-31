@@ -166,6 +166,7 @@ const FormContainer = styled.div`
   span {
     color: white;
     text-transform: uppercase;
+    text-align: center;
     a {
       color: #4e0eff;
       text-decoration: none;
